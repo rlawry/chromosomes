@@ -1,0 +1,470 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Chromosome Yearbook</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Graduate&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: a yearbook spread — varsity cover band, then a grid of school-photo portraits, one per chromosome pair. */
+:root {
+  --bg: #e7ebf2;
+  --sheet: #fbfcfe;
+  --ink: #1b2340;
+  --muted: #56607d;
+  --gold: #9a6d16;
+  --rule: #d3d9e6;
+  --print: #ffffff;
+  --photo-a: #a9c0d6;
+  --photo-b: #6e8bab;
+  --chromo: #efeaf7;
+  --chromo-edge: #3b3358;
+  --band: #4a3d73;
+  --overlay: #fbfcfe;
+  --c-blood: #c0263a;
+  --c-looks: #1f63c9;
+  --c-body: #22804a;
+  --c-protect: #7445c2;
+  --font-display: "Graduate", "Rockwell", "Georgia", serif;
+  --font-body: "Atkinson Hyperlegible", "Verdana", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10141f; --sheet: #181e2d; --ink: #e8ebf4; --muted: #a0a9c4; --gold: #e2b65c;
+    --rule: #2c3449; --print: #262e42; --photo-a: #3a5373; --photo-b: #1d2c42;
+    --chromo: #e6e0f2; --chromo-edge: #0f0c1c; --band: #46396d; --overlay: #1f2638;
+    --c-blood: #ff6f80; --c-looks: #74a8ff; --c-body: #5fcf8a; --c-protect: #b993ff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10141f; --sheet: #181e2d; --ink: #e8ebf4; --muted: #a0a9c4; --gold: #e2b65c;
+  --rule: #2c3449; --print: #262e42; --photo-a: #3a5373; --photo-b: #1d2c42;
+  --chromo: #e6e0f2; --chromo-edge: #0f0c1c; --band: #46396d; --overlay: #1f2638;
+  --c-blood: #ff6f80; --c-looks: #74a8ff; --c-body: #5fcf8a; --c-protect: #b993ff;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 40px;
+}
+.sheet {
+  max-width: 1180px;
+  margin: 0 auto;
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  box-shadow: 0 1px 0 var(--rule), 0 18px 40px -28px rgba(10, 20, 50, .45);
+  padding: clamp(18px, 4vw, 44px);
+  display: grid;
+  gap: 28px;
+}
+
+/* Cover */
+header { display: grid; gap: 10px; border-bottom: 3px double var(--gold); padding-bottom: 22px; }
+.eyebrow {
+  font-family: var(--font-display);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-size: 14px;
+  margin: 0;
+}
+h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(34px, 7vw, 64px);
+  line-height: 1;
+  letter-spacing: .02em;
+  margin: 0;
+  text-wrap: balance;
+}
+.intro { margin: 0; max-width: 62ch; font-size: 18px; }
+.intro strong { color: var(--ink); }
+
+/* Words to know */
+.words { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.word {
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 12px 14px;
+  min-width: 0;
+}
+.word b { display: block; font-family: var(--font-display); font-weight: 400; letter-spacing: .06em; font-size: 15px; color: var(--gold); text-transform: uppercase; }
+.word span { font-size: 16px; }
+
+/* Color key */
+.key { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.key-label { font-weight: 700; margin-right: 4px; }
+.chip {
+  font: inherit;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--rule);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.chip:hover { border-color: var(--muted); }
+.chip[aria-pressed="true"] { border-color: var(--ink); font-weight: 700; }
+.chip:focus-visible, .card:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.dot { width: 14px; height: 14px; border-radius: 50%; flex: none; background: var(--dot); }
+.hint { color: var(--muted); font-size: 15px; margin: 0; }
+
+/* Portrait grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 22px 18px;
+}
+.card {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity .2s ease;
+  min-width: 0;
+}
+.card.dim { opacity: .28; }
+.photo {
+  background: var(--print);
+  padding: 7px 7px 7px;
+  border: 1px solid var(--rule);
+  box-shadow: 0 6px 14px -10px rgba(10, 20, 50, .6);
+}
+.backdrop {
+  position: relative;
+  aspect-ratio: 5 / 6;
+  max-width: 100%;
+  background:
+    radial-gradient(120% 90% at 30% 25%, var(--photo-a) 0%, transparent 60%),
+    radial-gradient(90% 70% at 80% 85%, var(--photo-a) 0%, transparent 70%),
+    var(--photo-b);
+  overflow: hidden;
+}
+.backdrop svg { width: 100%; height: 100%; display: block; }
+.jersey {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.45);
+}
+.caption { display: grid; gap: 1px; text-align: center; }
+.caption .name { font-weight: 700; font-size: 17px; }
+.caption .title { font-style: italic; color: var(--muted); font-size: 15px; line-height: 1.3; }
+.caption .dots { display: flex; justify-content: center; gap: 5px; margin-top: 4px; min-height: 12px; }
+.caption .dots .dot { width: 12px; height: 12px; }
+
+/* Back of the photo: shown on hover, focus, or tap */
+.back {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--overlay);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  padding: 12px 12px 14px;
+  overflow-y: auto;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
+  box-shadow: 0 16px 30px -18px rgba(10, 20, 50, .7);
+}
+.back h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: .03em;
+  line-height: 1.15;
+}
+.back .sup { margin: 0; font-style: italic; color: var(--gold); font-size: 15px; line-height: 1.3; }
+.back ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.back li { display: grid; grid-template-columns: 14px 1fr; gap: 8px; align-items: start; font-size: 16px; line-height: 1.35; }
+.back li .dot { margin-top: 4px; }
+.back li small { display: block; color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
+.back .fact { margin: 0; padding-top: 8px; border-top: 1px dashed var(--rule); font-size: 15px; line-height: 1.35; }
+.back .fact b { color: var(--gold); }
+
+@media (hover: hover) {
+  .card:hover .back { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+}
+.card:focus-visible .back, .card.open .back { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+
+footer { border-top: 3px double var(--gold); padding-top: 18px; display: grid; gap: 6px; }
+footer p { margin: 0; max-width: 70ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  .back, .card { transition: none; }
+}
+@media (max-width: 420px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; }
+  .back li { font-size: 15px; }
+}
+</style>
+
+<main class="sheet">
+  <header>
+    <p class="eyebrow">Class of 23 Pairs</p>
+    <h1>Chromosome Yearbook</h1>
+    <p class="intro">Every person has <strong>46 chromosomes</strong> in <strong>23 pairs</strong>. You get one chromosome in each pair from each biological parent. <strong>Point at a picture</strong> to see what that chromosome does. On a tablet, <strong>tap</strong> it.</p>
+  </header>
+
+  <section class="words" aria-label="Words to know">
+    <div class="word"><b>Chromosome</b><span>A tiny bundle in your cells that holds your DNA.</span></div>
+    <div class="word"><b>Gene</b><span>One instruction on a chromosome. It tells your body how to build something.</span></div>
+    <div class="word"><b>Trait</b><span>Something about you, like eye color or blood type.</span></div>
+  </section>
+
+  <section class="key" aria-label="Color key">
+    <span class="key-label">Color key:</span>
+    <button class="chip" type="button" id="f-all" data-cat="all" aria-pressed="true">Show all</button>
+    <button class="chip" type="button" id="f-blood" data-cat="blood" aria-pressed="false"><span class="dot" style="--dot:var(--c-blood)"></span>Blood</button>
+    <button class="chip" type="button" id="f-looks" data-cat="looks" aria-pressed="false"><span class="dot" style="--dot:var(--c-looks)"></span>Looks</button>
+    <button class="chip" type="button" id="f-body" data-cat="body" aria-pressed="false"><span class="dot" style="--dot:var(--c-body)"></span>Body jobs</button>
+    <button class="chip" type="button" id="f-protect" data-cat="protect" aria-pressed="false"><span class="dot" style="--dot:var(--c-protect)"></span>Protection</button>
+  </section>
+  <p class="hint">The colored lines on each chromosome show where the gene sits. Pictures are drawn to scale, so big chromosomes look big.</p>
+
+  <section class="grid" id="grid" aria-label="Chromosome portraits"></section>
+
+  <footer>
+    <p><strong>Remember:</strong> Most traits, like height and skin color, come from <strong>many genes working together</strong>.</p>
+    <p class="hint">Chromosome 9 = blood type. Chromosome 15 = eye color. X = color vision. Y = helps guide how the body develops.</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var CAT = {
+    blood:   { label: "Blood",      color: "var(--c-blood)" },
+    looks:   { label: "Looks",      color: "var(--c-looks)" },
+    body:    { label: "Body jobs",  color: "var(--c-body)" },
+    protect: { label: "Protection", color: "var(--c-protect)" }
+  };
+
+  // len = size in millions of DNA letters; cen = where the pinched middle sits (0 = top, 1 = bottom);
+  // pos = where the gene sits along the chromosome.
+  var CHROMOS = [
+    { n: "1",  len: 248, cen: .50, sup: "Biggest in the Class", traits: [{ t: "Blood type: + or −", c: "blood", pos: .10 }], fact: "The biggest chromosome you have." },
+    { n: "2",  len: 242, cen: .39, sup: "Most Likely to Drink Milk", traits: [{ t: "Digesting milk as a grown-up", c: "body", pos: .56 }] },
+    { n: "3",  len: 198, cen: .47, sup: "Class Bodyguard", traits: [{ t: "Helps fight some viruses", c: "protect", pos: .23 }] },
+    { n: "4",  len: 190, cen: .27, sup: "Cleanup Crew", traits: [{ t: "Helps break down alcohol", c: "body", pos: .52 }] },
+    { n: "5",  len: 181, cen: .27, sup: "Skin Tone Team", traits: [{ t: "Helps control skin color", c: "looks", pos: .19 }] },
+    { n: "6",  len: 171, cen: .35, sup: "Best at Spotting Strangers", traits: [{ t: "Helps your body tell your cells from germs", c: "protect", pos: .18 }] },
+    { n: "7",  len: 159, cen: .38, sup: "Most Talkative", traits: [{ t: "Speaking and language", c: "body", pos: .72 }] },
+    { n: "8",  len: 145, cen: .31, sup: "Quiet Worker", traits: [{ t: "Helps clean fat out of your blood", c: "body", pos: .14 }] },
+    { n: "9",  len: 138, cen: .31, sup: "Blood Type Boss", traits: [{ t: "Blood type: A, B, AB, or O", c: "blood", pos: .96 }] },
+    { n: "10", len: 134, cen: .30, sup: "Cell Guard", traits: [{ t: "Helps stop cancer cells from growing", c: "protect", pos: .66 }] },
+    { n: "11", len: 135, cen: .40, sup: "Sweetest in the Class", traits: [{ t: "Makes insulin, which controls blood sugar", c: "body", pos: .02 }, { t: "Makes part of the protein that carries oxygen in your blood", c: "blood", pos: .05 }] },
+    { n: "12", len: 133, cen: .27, sup: "Protein Cruncher", traits: [{ t: "Helps break down protein from food", c: "body", pos: .77 }] },
+    { n: "13", len: 114, cen: .15, sup: "Cancer Fighter", traits: [{ t: "Helps stop cancer cells from growing", c: "protect", pos: .28 }] },
+    { n: "14", len: 107, cen: .16, sup: "Lung Protector", traits: [{ t: "Helps protect your lungs", c: "protect", pos: .88 }] },
+    { n: "15", len: 102, cen: .17, sup: "Best Eyes in the Class", traits: [{ t: "Eye color", c: "looks", pos: .27 }, { t: "Helps control skin color", c: "looks", pos: .47 }] },
+    { n: "16", len: 90,  cen: .41, sup: "Most Likely to Have Red Hair", traits: [{ t: "Red hair", c: "looks", pos: .99 }] },
+    { n: "17", len: 83,  cen: .30, sup: "Captain of Cell Safety", traits: [{ t: "Helps stop cancer cells from growing", c: "protect", pos: .52 }] },
+    { n: "18", len: 80,  cen: .21, sup: "Always Thinking About Lunch", traits: [{ t: "Helps control hunger", c: "body", pos: .75 }] },
+    { n: "19", len: 59,  cen: .45, sup: "Heart Helper", traits: [{ t: "Helps control cholesterol, a fat in your blood", c: "body", pos: .19 }], fact: "Small, but packed with lots of genes." },
+    { n: "20", len: 64,  cen: .44, sup: "Brain Buddy", traits: [{ t: "Makes a protein found in the brain", c: "body", pos: .07 }] },
+    { n: "21", len: 47,  cen: .26, sup: "Smallest in the Class", traits: [], fact: "The smallest chromosome. A person with three copies instead of two has Down syndrome." },
+    { n: "22", len: 51,  cen: .29, sup: "Nerve Keeper", traits: [{ t: "Helps keep nerves healthy", c: "protect", pos: .58 }] },
+    { n: "23", name: "Pair 23: X and Y", sex: true, sup: "Mix-and-Match Pair",
+      x: { len: 156, cen: .39 }, y: { len: 57, cen: .18 },
+      traits: [{ t: "X: Red-green color vision", c: "looks", pos: .99, on: "x" }, { t: "Y: Helps guide how the body grows and develops", c: "body", pos: .05, on: "y" }],
+      fact: "This is the only pair where the two chromosomes can look very different. The X is big. The Y is small." }
+  ];
+
+  var NS = "http://www.w3.org/2000/svg";
+  var SCALE = 116 / 248;   // drawing units per million letters; chromosome 1 is 116 units tall
+  var W = 15;              // width of one chromosome
+  var MID = 74;            // vertical center of the drawing
+
+  function rng(seed) {
+    var s = seed * 9301 + 49297;
+    return function () { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+  }
+  function el(name, attrs, parent) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  // Draw one chromosome (p arm, pinch, q arm) with stripes and gene marks.
+  function drawChromosome(svg, id, x, len, cen, marks, seed) {
+    var L = len * SCALE;
+    var top = MID - L / 2, bot = top + L;
+    var c = top + L * cen;
+    var pin = Math.min(2.2, L * 0.06);
+    var shapes = [
+      { x: x, y: top, w: W, h: Math.max(2, c - pin - top) },
+      { x: x, y: c + pin, w: W, h: Math.max(2, bot - c - pin) }
+    ];
+    var defs = el("defs", {}, svg);
+    var clip = el("clipPath", { id: id }, defs);
+    var g = el("g", {}, svg);
+
+    shapes.forEach(function (s) {
+      var r = Math.min(W / 2, s.h / 2);
+      el("rect", { x: s.x, y: s.y, width: s.w, height: s.h, rx: r }, clip);
+      el("rect", { x: s.x, y: s.y, width: s.w, height: s.h, rx: r, fill: "var(--chromo)", stroke: "var(--chromo-edge)", "stroke-width": 1.1 }, g);
+    });
+    el("rect", { x: x + 4, y: c - pin - 0.5, width: W - 8, height: pin * 2 + 1, fill: "var(--chromo)" }, clip);
+    el("rect", { x: x + 4, y: c - pin - 0.5, width: W - 8, height: pin * 2 + 1, fill: "var(--chromo)", stroke: "var(--chromo-edge)", "stroke-width": 0.8 }, g);
+
+    var bands = el("g", { "clip-path": "url(#" + id + ")" }, svg);
+    var r = rng(seed), y = top + 1.5, dark = false;
+    while (y < bot) {
+      var h = 2 + r() * 5;
+      if (dark) el("rect", { x: x - 1, y: y, width: W + 2, height: h, fill: "var(--band)", "fill-opacity": (0.35 + r() * 0.55).toFixed(2) }, bands);
+      y += h; dark = !dark;
+    }
+
+    marks.forEach(function (m) {
+      var my = Math.min(bot - 2.5, Math.max(top + 2.5, top + L * m.pos));
+      el("rect", { x: x - 3.5, y: my - 1.9, width: W + 7, height: 3.8, rx: 1.2, fill: CAT[m.c].color, stroke: "var(--print)", "stroke-width": 0.9 }, svg);
+    });
+  }
+
+  function portrait(ch, i) {
+    var svg = el("svg", { viewBox: "0 0 100 148", "aria-hidden": "true", focusable: "false" });
+    if (ch.sex) {
+      drawChromosome(svg, "cx", 50 - 6 - W, ch.x.len, ch.x.cen, ch.traits.filter(function (t) { return t.on === "x"; }), 23);
+      drawChromosome(svg, "cy", 56, ch.y.len, ch.y.cen, ch.traits.filter(function (t) { return t.on === "y"; }), 24);
+      el("text", { x: 50 - 6 - W / 2, y: 141, "text-anchor": "middle", "font-size": 9, "font-weight": 700, fill: "#fff" }, svg).textContent = "X";
+      el("text", { x: 56 + W / 2, y: 141, "text-anchor": "middle", "font-size": 9, "font-weight": 700, fill: "#fff" }, svg).textContent = "Y";
+    } else {
+      var marks = ch.traits.filter(function (t) { return t.pos != null; });
+      drawChromosome(svg, "c" + ch.n + "a", 50 - 4 - W, ch.len, ch.cen, marks, i + 1);
+      drawChromosome(svg, "c" + ch.n + "b", 54, ch.len, ch.cen, marks, i + 31);
+    }
+    return svg;
+  }
+
+  var grid = document.getElementById("grid");
+
+  CHROMOS.forEach(function (ch, i) {
+    var name = ch.name || "Chromosome " + ch.n;
+    var cats = ch.traits.map(function (t) { return t.c; }).filter(function (c, j, a) { return a.indexOf(c) === j; });
+
+    var card = document.createElement("div");
+    card.className = "card";
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-expanded", "false");
+    card.setAttribute("aria-label", name + ". " + ch.sup + ". Show traits.");
+    card.dataset.cats = cats.join(" ");
+
+    var photo = document.createElement("div");
+    photo.className = "photo";
+    var back = document.createElement("div");
+    back.className = "backdrop";
+    back.appendChild(portrait(ch, i));
+    var jersey = document.createElement("span");
+    jersey.className = "jersey";
+    jersey.textContent = ch.sex ? "X Y" : ch.n;
+    back.appendChild(jersey);
+    photo.appendChild(back);
+
+    var cap = document.createElement("div");
+    cap.className = "caption";
+    cap.innerHTML = '<span class="name"></span><span class="title"></span><span class="dots"></span>';
+    cap.querySelector(".name").textContent = name;
+    cap.querySelector(".title").textContent = "“" + ch.sup + "”";
+    cats.forEach(function (c) {
+      var d = document.createElement("span");
+      d.className = "dot";
+      d.style.setProperty("--dot", CAT[c].color);
+      cap.querySelector(".dots").appendChild(d);
+    });
+
+    var info = document.createElement("div");
+    info.className = "back";
+    var h = document.createElement("h3"); h.textContent = name; info.appendChild(h);
+    var s = document.createElement("p"); s.className = "sup"; s.textContent = "Most likely to be: " + ch.sup; info.appendChild(s);
+    if (ch.traits.length) {
+      var ul = document.createElement("ul");
+      ch.traits.forEach(function (t) {
+        var li = document.createElement("li");
+        var d = document.createElement("span"); d.className = "dot"; d.style.setProperty("--dot", CAT[t.c].color);
+        var txt = document.createElement("span");
+        var small = document.createElement("small"); small.textContent = CAT[t.c].label;
+        txt.appendChild(small);
+        txt.appendChild(document.createTextNode(t.t));
+        li.appendChild(d); li.appendChild(txt); ul.appendChild(li);
+      });
+      info.appendChild(ul);
+    }
+    if (ch.fact) {
+      var f = document.createElement("p"); f.className = "fact";
+      f.innerHTML = "<b>Did you know?</b> ";
+      f.appendChild(document.createTextNode(ch.fact));
+      info.appendChild(f);
+    }
+
+    card.appendChild(photo);
+    card.appendChild(cap);
+    card.appendChild(info);
+    grid.appendChild(card);
+  });
+
+  // Tap to open on touch screens; Enter or Space for keyboards.
+  function closeAll(except) {
+    grid.querySelectorAll(".card.open").forEach(function (c) {
+      if (c !== except) { c.classList.remove("open"); c.setAttribute("aria-expanded", "false"); }
+    });
+  }
+  function toggle(card) {
+    var open = !card.classList.contains("open");
+    closeAll(card);
+    card.classList.toggle("open", open);
+    card.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  grid.addEventListener("click", function (e) {
+    var card = e.target.closest(".card");
+    if (card) toggle(card);
+  });
+  grid.addEventListener("keydown", function (e) {
+    var card = e.target.closest(".card");
+    if (!card) return;
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(card); }
+    if (e.key === "Escape") closeAll(null);
+  });
+  document.addEventListener("click", function (e) { if (!e.target.closest(".card")) closeAll(null); });
+
+  // Color key filter
+  var chips = document.querySelectorAll(".chip");
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var cat = chip.dataset.cat;
+      chips.forEach(function (c) { c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+      grid.querySelectorAll(".card").forEach(function (card) {
+        var has = cat === "all" || card.dataset.cats.split(" ").indexOf(cat) !== -1;
+        card.classList.toggle("dim", !has);
+      });
+    });
+  });
+})();
+</script>
+
+</body></html>
